@@ -132,14 +132,14 @@
                 <tr>
                     @if($extra[1])
 
-                    <td>{{$banglaArray[0][0]}}</td>
-                    <td class="cTitle">{{$banglaArray[0][1]}}</td>
+                    <td>{{$<link rel="shortcut icon" href="img/favicon.ico">Array[0][0]}}</td>
+                    <td class="cTitle">{{$<link rel="shortcut icon" href="img/favicon.ico">Array[0][1]}}</td>
 
-                    <td><b>{{$banglaArray[0][2]}}</b></td>
-                    <td rowspan="2"><b>{{$banglaArray[0][2]+$banglaArray[1][2]}}</b></td>
+                    <td><b>{{$<link rel="shortcut icon" href="img/favicon.ico">Array[0][2]}}</b></td>
+                    <td rowspan="2"><b>{{$<link rel="shortcut icon" href="img/favicon.ico">Array[0][2]+$<link rel="shortcut icon" href="img/favicon.ico">Array[1][2]}}</b></td>
 
-                    <td><b>{{$banglaArray[0][3]}}</b></td>
-                    <td rowspan="2"><b>{{$banglaArray[0][3]+$banglaArray[1][3]}}</b></td>
+                    <td><b>{{$<link rel="shortcut icon" href="img/favicon.ico">Array[0][3]}}</b></td>
+                    <td rowspan="2"><b>{{$<link rel="shortcut icon" href="img/favicon.ico">Array[0][3]+$<link rel="shortcut icon" href="img/favicon.ico">Array[1][3]}}</b></td>
 
                     <td><b>{{$banglaArray[0][4]}}</b></td>
                     <td rowspan="2"><b>{{$banglaArray[0][4]+$banglaArray[1][4]}}</b></td>

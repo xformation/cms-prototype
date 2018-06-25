@@ -16,7 +16,7 @@
         ===
     -->
     <meta charset="utf-8">
-    <title>School Manage</title>
+  <title>College Manage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -57,7 +57,7 @@
 
                     </div>
                 @endif
-                <img src="img/logo.png" style="height:120px;">
+                <img src="img/logo.png" style="height:100px;">
 
                 <form class="form-horizontal" action="users/login" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -24,7 +24,7 @@
 @if (Session::get('accessdined'))
 <div class="alert alert-danger">
   <button data-dismiss="alert" class="close" type="button">×</button>
-  <strong>Process Faild.</strong> {{ Session::get('accessdined')}}
+  <strong>Process Failed.</strong> {{ Session::get('accessdined')}}
 
 </div>
 @endif
