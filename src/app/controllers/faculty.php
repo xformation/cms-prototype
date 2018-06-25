@@ -89,7 +89,7 @@ class facultyController extends \BaseController {
                 return Redirect::to('/faculty/create')->withErrors($messages)->withInput();
             }
             else {
-                Input::file('photo')->move(base_path() .'/public/images/teachers',$fileName);
+                Input::file('photo')->move(base_path() .'/public/images/facultys',$fileName);
                 $faculty->save();
                 return Redirect::to('/faculty/create')->with("success","Faculty added succesfully.");
             }
@@ -120,7 +120,7 @@ class facultyController extends \BaseController {
         $ml = Leaves::where('regNo',$id)->where('lType','ML')->whereYear('leaveDate','=',date('Y'))->where('status',2)->count();
         $ul = Leaves::where('regNo',$id)->where('lType','UL')->whereYear('leaveDate','=',date('Y'))->where('status',2)->count();
 
-        return View::Make("app.teacher.details",compact('teacher','cl','ml','ul'));
+        return View::Make("app.faculty.details",compact('faculty','cl','ml','ul'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -131,7 +131,7 @@ class facultyController extends \BaseController {
     public function edit($id)
     {
         $faculty = Faculty::where('regNo',$id)->where('isActive',1)->first();
-        return View::Make("app.teacher.edit",compact('teacher'));
+        return View::Make("app.faculty.edit",compact('faculty'));
     }
 
 
@@ -163,7 +163,7 @@ class facultyController extends \BaseController {
         $validator = \Validator::make(Input::all(), $rules);
         if ($validator->fails())
         {
-            return Redirect::to('/teacher/edit/'.Input::get('id'))->withErrors($validator);
+            return Redirect::to('/faculty/edit/'.Input::get('id'))->withErrors($validator);
         }
         else {
 
@@ -176,13 +176,13 @@ class facultyController extends \BaseController {
                 {
                     $messages = $validator->errors();
                     $messages->add('Notvalid!', 'Photo must be a image,jpeg,jpg,png!');
-                    return Redirect::to('/teacher/edit/'.Input::get('id'))->withErrors($messages);
+                    return Redirect::to('/faculty/edit/'.Input::get('id'))->withErrors($messages);
                 }
                 else {
 
                     $fileName=Input::get('regNo').'.'.Input::file('photo')->getClientOriginalExtension();
                     $faculty->photo = $fileName;
-                    Input::file('photo')->move(base_path() .'/public/images/teachers',$fileName);
+                    Input::file('photo')->move(base_path() .'/public/images/facultys',$fileName);
                 }
 
             }
@@ -207,7 +207,7 @@ class facultyController extends \BaseController {
             $faculty->parmanentAddress= Input::get('parmanentAddress');
             $faculty->update();
 
-            return Redirect::to('/teacher/list')->with("success","Teacher Updated Succesfully.");
+            return Redirect::to('/faculty/list')->with("success","Teacher Updated Succesfully.");
         }
 
 
@@ -226,7 +226,7 @@ class facultyController extends \BaseController {
         $faculty->isActive= 0;
         $faculty->save();
 
-        return Redirect::to('/teacher/list')->with("success","Teacher Deleted Succesfully.");
+        return Redirect::to('/faculty/list')->with("success","Teacher Deleted Succesfully.");
     }
 
     /**
@@ -235,7 +235,7 @@ class facultyController extends \BaseController {
      */
     public function createAttendance()
     {
-        return View::Make('app.teacher.attendance_create');
+        return View::Make('app.faculty.attendance_create');
     }
 
     /**
@@ -251,7 +251,7 @@ class facultyController extends \BaseController {
         $validator = Validator::make(array('ext' => $ext),array('ext' => 'in:csv,xls,xlsx')
         );
         if ($validator->fails()) {
-            return Redirect::to('/teacher-attendance/create')->withErrors($validator);
+            return Redirect::to('/faculty-attendance/create')->withErrors($validator);
         } else {
             try {
                 $toInsert = 0;
@@ -289,7 +289,7 @@ class facultyController extends \BaseController {
                         DB::rollback();
                         $errorMessages = new Illuminate\Support\MessageBag;
                         $errorMessages->add('Error', $e->getMessage());
-                        return Redirect::to('/teacher-attendance/create')->withErrors($errorMessages);
+                        return Redirect::to('/faculty-attendance/create')->withErrors($errorMessages);
 
                         // something went wrong
                     }
@@ -297,16 +297,16 @@ class facultyController extends \BaseController {
                 }
 
                 if($toInsert){
-                    return Redirect::to('/teacher-attendance/create')->with("success", $toInsert.' Teacher attendance record upload successfully.');
+                    return Redirect::to('/faculty-attendance/create')->with("success", $toInsert.' Teacher attendance record upload successfully.');
                 }
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Validation', 'File is empty or invalid data! Please follow help note.');
-                return Redirect::to('/teacher-attendance/create')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/create')->withErrors($errorMessages);
 
             } catch (\Exception $e) {
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Error', $e->getMessage());
-                return Redirect::to('/teacher-attendance/create')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/create')->withErrors($errorMessages);
             }
         }
     }
@@ -319,13 +319,13 @@ class facultyController extends \BaseController {
     {
         $searchType = Input::get('searchType','1');
         $egroup = Input::get('egroup',null);
-        $regNo = Input::get('teacher',null);
+        $regNo = Input::get('faculty',null);
         $isPrint = Input::get('print_view',null);
         $dateFrom = Input::get('dateFrom',date('Y-m-d',strtotime(date('Y-m-d')."-7 day")));
         $dateTo = Input::get('dateTo',date('Y-m-d'));
 
         if($regNo && $regNo !='0'){
-            $attendance = TeacherAttendance::with('teacher')
+            $attendance = TeacherAttendance::with('faculty')
                 ->where('regNo',$regNo)
                 ->whereDate('date','>=',$dateFrom)
                 ->whereDate('date','<=',$dateTo)
@@ -335,8 +335,8 @@ class facultyController extends \BaseController {
         }
         else{
             if($egroup && $egroup !='0'){
-                $attendance = TeacherAttendance::with('teacher')
-                    ->whereHas('teacher', function($q) use ($egroup) {
+                $attendance = TeacherAttendance::with('faculty')
+                    ->whereHas('faculty', function($q) use ($egroup) {
                         $q->where('egroup', '=', $egroup);
                     })
                     ->whereDate('date','>=',$dateFrom)
@@ -345,7 +345,7 @@ class facultyController extends \BaseController {
                     ->get();
             }
             else{
-                $attendance = TeacherAttendance::with('teacher')
+                $attendance = TeacherAttendance::with('faculty')
                     ->whereDate('date','>=',$dateFrom)
                     ->whereDate('date','<=',$dateTo)
                     ->orderBy('date','desc')
@@ -402,17 +402,17 @@ class facultyController extends \BaseController {
             if(!count($institute)){
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Error','Please setup institute information!');
-                return Redirect::to('/teacher-attendance/list')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/list')->withErrors($errorMessages);
             }
 
-            return View::Make('app.teacher.attendance_report',compact('institute','teachers','attendance',
+            return View::Make('app.faculty.attendance_report',compact('institute','facultys','attendance',
                 'regNo','egroup','searchType','dateFrom','dateTo','holiDays','empWorks'
             ));
 
         }
         $facultys = ['0'=>'All']+Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
-        return View::Make('app.teacher.attendanceList',
-            compact('teachers','attendance','regNo','egroup','searchType',
+        return View::Make('app.faculty.attendanceList',
+            compact('facultys','attendance','regNo','egroup','searchType',
                 'dateFrom','dateTo','holiDays','empWorks'
             ));
     }
@@ -460,15 +460,15 @@ class facultyController extends \BaseController {
             if(!count($institute)){
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Error','Please setup institute information!');
-                return Redirect::to('/teacher-attendance/list')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/list')->withErrors($errorMessages);
             }
-            return View::Make('app.teacher.absenteeism_report',compact('institute','egroup','data','dateFrom','dateTo'));
+            return View::Make('app.faculty.absenteeism_report',compact('institute','egroup','data','dateFrom','dateTo'));
 
         }
 
 
 
-        return View::Make('app.teacher.absenteeism',compact('dateFrom','dateTo'));
+        return View::Make('app.faculty.absenteeism',compact('dateFrom','dateTo'));
     }/**
 
 
@@ -528,7 +528,7 @@ class facultyController extends \BaseController {
             if(count($myPart)!=2){
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Error','Please don\'t mess with inputs!!!');
-                return Redirect::to('/teacher-attendance/monthly-report')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/monthly-report')->withErrors($errorMessages);
             }
 
             $SelectCol = self::getSelectColumns($myPart[0],$myPart[1]);
@@ -542,13 +542,13 @@ class facultyController extends \BaseController {
             if(!count($institute)){
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Error','Please setup institute information!');
-                return Redirect::to('/teacher-attendance/monthly-report')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/monthly-report')->withErrors($errorMessages);
             }
 
-            return View::Make('app.teacher.monthly_attendance_report',compact('institute','data','keys','yearMonth','fridays','holiDays','empLeaves','empWorks'));
+            return View::Make('app.faculty.monthly_attendance_report',compact('institute','data','keys','yearMonth','fridays','holiDays','empLeaves','empWorks'));
 
         }
-        return View::Make('app.teacher.monthly_attendance',compact('yearMonth'));
+        return View::Make('app.faculty.monthly_attendance',compact('yearMonth'));
     }
 
 
@@ -585,7 +585,7 @@ class facultyController extends \BaseController {
     public function holidayIndex()
     {
         $holidays = Holidays::where('status',1)->get();
-        return View::Make('app.teacher.holiday.list',compact('holidays'));
+        return View::Make('app.faculty.holiday.list',compact('holidays'));
     }
 
 
@@ -702,9 +702,9 @@ class facultyController extends \BaseController {
         if($employee && strlen($employee)){
             $query = $query->where('regNo',$employee);
         }
-        $leaves = $query->with('teacher')->orderBy('leaveDate','desc')->get();
+        $leaves = $query->with('faculty')->orderBy('leaveDate','desc')->get();
         $facultys = ['0'=>'All']+Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
-        return View::Make('app.teacher.leave.list',compact('leaves','teachers','employee','type','status'));
+        return View::Make('app.faculty.leave.list',compact('leaves','facultys','employee','type','status'));
     }
 
 
@@ -717,7 +717,7 @@ class facultyController extends \BaseController {
     public function leaveCreate()
     {
         $facultys = Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
-        return View::Make('app.teacher.leave.create',compact('teachers'));
+        return View::Make('app.faculty.leave.create',compact('facultys'));
 
     }
 
@@ -789,7 +789,7 @@ class facultyController extends \BaseController {
 
             if(Input::hasFile('paper')){
                 $fileName=uniqid().'.'.Input::file('paper')->getClientOriginalExtension();
-                Input::file('paper')->move(base_path() .'/public/images/teachers',$fileName);
+                Input::file('paper')->move(base_path() .'/public/images/facultys',$fileName);
             }
 
             if($leaveDateEnd){
@@ -910,9 +910,9 @@ class facultyController extends \BaseController {
         if($employee && strlen($employee)){
             $query = $query->where('regNo',$employee);
         }
-        $workOutsides = $query->with('teacher')->orderBy('workDate','desc')->get();
+        $workOutsides = $query->with('faculty')->orderBy('workDate','desc')->get();
         $facultys = ['0'=>'All']+Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
-        return View::Make('app.teacher.workoutside.list',compact('workOutsides','teachers','employee'));
+        return View::Make('app.faculty.workoutside.list',compact('workOutsides','facultys','employee'));
     }
 
 
@@ -925,7 +925,7 @@ class facultyController extends \BaseController {
     public function workOutsideCreate()
     {
         $facultys = Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
-        return View::Make('app.teacher.workoutside.create',compact('teachers'));
+        return View::Make('app.faculty.workoutside.create',compact('facultys'));
 
     }
 
@@ -964,7 +964,7 @@ class facultyController extends \BaseController {
 
             if(Input::hasFile('paper')){
                 $fileName=uniqid().'.'.Input::file('paper')->getClientOriginalExtension();
-                Input::file('paper')->move(base_path() .'/public/images/teachers',$fileName);
+                Input::file('paper')->move(base_path() .'/public/images/facultys',$fileName);
             }
 
             if($leaveDateEnd){
@@ -1109,7 +1109,7 @@ class facultyController extends \BaseController {
             if(count($myPart)!=2){
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Error','Please don\'t mess with inputs!!!');
-                return Redirect::to('/teacher-attendance/monthly-report-2')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/monthly-report-2')->withErrors($errorMessages);
             }
 
             $SelectCol = self::getSelectColumns($myPart[0],$myPart[1]);
@@ -1143,14 +1143,14 @@ class facultyController extends \BaseController {
             if(!count($institute)){
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Error','Please setup institute information!');
-                return Redirect::to('/teacher-attendance/monthly-report-2')->withErrors($errorMessages);
+                return Redirect::to('/faculty-attendance/monthly-report-2')->withErrors($errorMessages);
             }
 
-            return View::Make('app.teacher.monthly_attendance_report_two',compact('institute','data','keys','yearMonth','fridays','holiDays','empLeaves','empWorks','prityData'));
+            return View::Make('app.faculty.monthly_attendance_report_two',compact('institute','data','keys','yearMonth','fridays','holiDays','empLeaves','empWorks','prityData'));
 
         }
 
-        return View::Make('app.teacher.monthly_attendance_two',compact('yearMonth'));
+        return View::Make('app.faculty.monthly_attendance_two',compact('yearMonth'));
     }
 
 }

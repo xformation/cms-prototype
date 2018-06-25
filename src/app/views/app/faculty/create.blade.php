@@ -6,7 +6,7 @@
 @if (Session::get('success'))
 <div class="alert alert-success">
   <button data-dismiss="alert" class="close" type="button">×</button>
-  <strong>Process Success.</strong> {{ Session::get('success')}}<br><a href="/teacher/list">View List</a><br>
+  <strong>Process Success.</strong> {{ Session::get('success')}}<br><a href="/faculty/list">View List</a><br>
 
 </div>
 @endif
@@ -14,7 +14,7 @@
   <div class="box col-md-12">
     <div class="box-inner">
       <div data-original-title="" class="box-header well">
-        <h2><i class="glyphicon glyphicon-user"></i> New Employee Etnry</h2>
+        <h2><i class="glyphicon glyphicon-user"></i> New Faculty Etnry</h2>
 
       </div>
       <div class="box-content">
@@ -28,12 +28,12 @@
           </ul>
         </div>
         @endif
-        <form role="form" action="/teacher/create" method="post" enctype="multipart/form-data">
+        <form role="form" action="/faculty/create" method="post" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
           <div class="row">
             <div class="col-md-12">
-              <h3 class="text-info"> Employee's Detail</h3>
+              <h3 class="text-info"> Faculty's Detail</h3>
               <hr>
             </div>
           </div>
@@ -50,7 +50,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="regNo">Employee No</label>
+                  <label for="regNo">Faculty No</label>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign blue"></i></span>
                     <input type="text" class="form-control" required name="regNo" value="" placeholder="">
@@ -59,12 +59,12 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label" for="gender">Employee type</label>
+                  <label class="control-label" for="gender">Faculty type</label>
 
                   <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign blue"></i></span>
                     <select name="egroup" class="form-control" required >
-                      <option value="Teacher">Teacher</option>
+                      <option value="Faculty">Faculty</option>
                       <option value="Staff">Staff</option>
                     </select>
                   </div>
