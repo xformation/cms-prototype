@@ -57,7 +57,7 @@
 
                     </div>
                 @endif
-                <img src="img/logo.png" style="height:120px;">
+                <img src="img/logo.png" style="height:100px;">
 
                 <form class="form-horizontal" action="users/login" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
