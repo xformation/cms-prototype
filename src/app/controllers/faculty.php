@@ -207,7 +207,7 @@ class facultyController extends \BaseController {
             $faculty->parmanentAddress= Input::get('parmanentAddress');
             $faculty->update();
 
-            return Redirect::to('/faculty/list')->with("success","Teacher Updated Succesfully.");
+            return Redirect::to('/faculty/list')->with("success","Faculty Updated Succesfully.");
         }
 
 
@@ -226,7 +226,7 @@ class facultyController extends \BaseController {
         $faculty->isActive= 0;
         $faculty->save();
 
-        return Redirect::to('/faculty/list')->with("success","Teacher Deleted Succesfully.");
+        return Redirect::to('/faculty/list')->with("success","Faculty Deleted Succesfully.");
     }
 
     /**
@@ -280,7 +280,7 @@ class facultyController extends \BaseController {
                                     'created_at' => \Carbon\Carbon::createFromFormat('d-m-Y H:i:s',$row['created_at'])
                                 ];
 
-                                TeacherAttendance::insert($attenData);
+                                FacultyAttendance::insert($attenData);
                                 $toInsert++;
                             }
                         }
@@ -297,7 +297,7 @@ class facultyController extends \BaseController {
                 }
 
                 if($toInsert){
-                    return Redirect::to('/faculty-attendance/create')->with("success", $toInsert.' Teacher attendance record upload successfully.');
+                    return Redirect::to('/faculty-attendance/create')->with("success", $toInsert.' Faculty attendance record upload successfully.');
                 }
                 $errorMessages = new Illuminate\Support\MessageBag;
                 $errorMessages->add('Validation', 'File is empty or invalid data! Please follow help note.');
@@ -325,7 +325,7 @@ class facultyController extends \BaseController {
         $dateTo = Input::get('dateTo',date('Y-m-d'));
 
         if($regNo && $regNo !='0'){
-            $attendance = TeacherAttendance::with('faculty')
+            $attendance = FacultyAttendance::with('faculty')
                 ->where('regNo',$regNo)
                 ->whereDate('date','>=',$dateFrom)
                 ->whereDate('date','<=',$dateTo)
@@ -335,7 +335,7 @@ class facultyController extends \BaseController {
         }
         else{
             if($egroup && $egroup !='0'){
-                $attendance = TeacherAttendance::with('faculty')
+                $attendance = FacultyAttendance::with('faculty')
                     ->whereHas('faculty', function($q) use ($egroup) {
                         $q->where('egroup', '=', $egroup);
                     })
@@ -345,7 +345,7 @@ class facultyController extends \BaseController {
                     ->get();
             }
             else{
-                $attendance = TeacherAttendance::with('faculty')
+                $attendance = FacultyAttendance::with('faculty')
                     ->whereDate('date','>=',$dateFrom)
                     ->whereDate('date','<=',$dateTo)
                     ->orderBy('date','desc')
@@ -435,10 +435,10 @@ class facultyController extends \BaseController {
 
             $data=[];
 
-            if($egroup=="Teacher"){
-                $facultys = Faculty::select('regNo')->where('egroup','Teacher')->lists('regNo');
+            if($egroup=="Faculty"){
+                $facultys = Faculty::select('regNo')->where('egroup','Faculty')->lists('regNo');
 
-                $data = TeacherAttendance::selectRaw("date, COUNT(CASE WHEN vSTATUS='P' THEN vSTATUS ELSE NULL END) present, COUNT(CASE WHEN vSTATUS='A' THEN vSTATUS ELSE NULL END) absent, COUNT(vSTATUS) as total")
+                $data = FacultyAttendance::selectRaw("date, COUNT(CASE WHEN vSTATUS='P' THEN vSTATUS ELSE NULL END) present, COUNT(CASE WHEN vSTATUS='A' THEN vSTATUS ELSE NULL END) absent, COUNT(vSTATUS) as total")
                     ->whereDate('date','>=',$dateFrom)
                     ->whereDate('date','<=',$dateTo)
                     ->whereIn('regNo',$facultys)
@@ -448,7 +448,7 @@ class facultyController extends \BaseController {
             else{
                 $staffs = Faculty::select('regNo')->where('egroup','Staff')->lists('regNo');
 
-                $data = TeacherAttendance::selectRaw("date, COUNT(CASE WHEN vSTATUS='P' THEN vSTATUS ELSE NULL END) present, COUNT(CASE WHEN vSTATUS='A' THEN vSTATUS ELSE NULL END) absent, COUNT(vSTATUS) as total")
+                $data = FacultyAttendance::selectRaw("date, COUNT(CASE WHEN vSTATUS='P' THEN vSTATUS ELSE NULL END) present, COUNT(CASE WHEN vSTATUS='A' THEN vSTATUS ELSE NULL END) absent, COUNT(vSTATUS) as total")
                     ->whereDate('date','>=',$dateFrom)
                     ->whereDate('date','<=',$dateTo)
                     ->whereIn('regNo',$staffs)
@@ -532,7 +532,7 @@ class facultyController extends \BaseController {
             }
 
             $SelectCol = self::getSelectColumns($myPart[0],$myPart[1]);
-            $fullSql ="SELECT t.fullName as name,t.regNo,".$SelectCol." FROM TeacherAttendance as ta join Faculty as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
+            $fullSql ="SELECT t.fullName as name,t.regNo,".$SelectCol." FROM FacultyAttendance as ta join Faculty as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
 //            dd($fullSql);
             $data = DB::select($fullSql);
 //            return $data;
@@ -1113,7 +1113,7 @@ class facultyController extends \BaseController {
             }
 
             $SelectCol = self::getSelectColumns($myPart[0],$myPart[1]);
-            $fullSql ="SELECT t.fullName as name,t.regNo,'status/time',".$SelectCol." FROM TeacherAttendance as ta join Faculty as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
+            $fullSql ="SELECT t.fullName as name,t.regNo,'status/time',".$SelectCol." FROM FacultyAttendance as ta join Faculty as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
             $data = DB::select($fullSql);
             $keys = array_keys((array)$data[0]);
 
@@ -1123,7 +1123,7 @@ class facultyController extends \BaseController {
                 $regNumbers[] = $datum->regNo;
             }
 
-            $attendance = TeacherAttendance::whereIn('regNo',$regNumbers)
+            $attendance = FacultyAttendance::whereIn('regNo',$regNumbers)
                 ->whereDate('date','>=',$firstDate)
                 ->whereDate('date','<=',$lastDate)
                 ->orderBy('date','asc')

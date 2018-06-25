@@ -30,7 +30,7 @@
 
                       <div class="row">
                           <div class="col-md-12">
-                              <h3 class="text-info"> Employee's Detail</h3>
+                              <h3 class="text-info"> Faculty's Detail</h3>
                               <hr>
                           </div>
                       </div>
@@ -47,7 +47,7 @@
                               </div>
                               <div class="col-md-4">
                                   <div class="form-group">
-                                      <label for="regNo">Employee No</label>
+                                      <label for="regNo">Faculty No</label>
                                       <div class="input-group">
                                           <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign blue"></i></span>
                                           <input type="text" class="form-control" readonly name="regNo" value="{{$teacher->regNo}}" placeholder="">
@@ -56,7 +56,7 @@
                               </div>
                               <div class="col-md-4">
                                   <div class="form-group">
-                                      <label class="control-label" for="gender">Employee type</label>
+                                      <label class="control-label" for="gender">Faculty type</label>
 
                                       <div class="input-group">
                                           <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign blue"></i></span>
