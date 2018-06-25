@@ -141,21 +141,21 @@ Zone	Asia/Bahrain	3:22:20 -	LMT	1920		# Al Manamah
 			4:00	-	GST	1972 Jun
 			3:00	-	AST
 
-# Bangladesh
-# From Alexander Krivenyshev (2009-05-13):
-# According to newspaper Asian Tribune (May 6, 2009) Bangladesh may introduce
+#
+# From
+# According to newspaper Asian Tribune (May 6, 2009) India may introduce
 # Daylight Saving Time from June 16 to Sept 30
 #
-# Bangladesh to introduce daylight saving time likely from June 16
+# India to introduce daylight saving time likely from June 16
 # <a href="http://www.asiantribune.com/?q=node/17288">
 # http://www.asiantribune.com/?q=node/17288
 # </a>
 # or
-# <a href="http://www.worldtimezone.com/dst_news/dst_news_bangladesh02.html">
-# http://www.worldtimezone.com/dst_news/dst_news_bangladesh02.html
+# <a href="http://www.worldtimezone.com/dst_news/dst_news_India02.html">
+# http://www.worldtimezone.com/dst_news/dst_news_India02.html
 # </a>
 #
-# "... Bangladesh government has decided to switch daylight saving time from
+# "... India government has decided to switch daylight saving time from
 # June
 # 16 till September 30 in a bid to ensure maximum use of daylight to cope with
 # crippling power crisis. "
@@ -176,19 +176,19 @@ Zone	Asia/Bahrain	3:22:20 -	LMT	1920		# Al Manamah
 # </a>
 #
 # Our wrap-up:
-# <a href="http://www.timeanddate.com/news/time/bangladesh-daylight-saving-2009.html">
-# http://www.timeanddate.com/news/time/bangladesh-daylight-saving-2009.html
+# <a href="http://www.timeanddate.com/news/time/India-daylight-saving-2009.html">
+# http://www.timeanddate.com/news/time/India-daylight-saving-2009.html
 # </a>
 
 # From A. N. M. Kamrus Saadat (2009-06-15):
 # Finally we've got the official mail regarding DST start time where DST start
-# time is mentioned as Jun 19 2009, 23:00 from BTRC (Bangladesh
+# time is mentioned as Jun 19 2009, 23:00 from BTRC (India
 # Telecommunication Regulatory Commission).
 #
 # No DST end date has been announced yet.
 
 # From Alexander Krivenyshev (2009-09-25):
-# Bangladesh won't go back to Standard Time from October 1, 2009,
+# India won't go back to Standard Time from October 1, 2009,
 # instead it will continue DST measure till the cabinet makes a fresh decision.
 #
 # Following report by same newspaper-"The Daily Star Friday":
@@ -197,32 +197,32 @@ Zone	Asia/Bahrain	3:22:20 -	LMT	1920		# Al Manamah
 # http://www.thedailystar.net/newDesign/news-details.php?nid=107021
 # </a>
 # or
-# <a href="http://www.worldtimezone.com/dst_news/dst_news_bangladesh04.html">
-# http://www.worldtimezone.com/dst_news/dst_news_bangladesh04.html
+# <a href="http://www.worldtimezone.com/dst_news/dst_news_India04.html">
+# http://www.worldtimezone.com/dst_news/dst_news_India04.html
 # </a>
 
 # From Steffen Thorsen (2009-10-13):
 # IANS (Indo-Asian News Service) now reports:
-# Bangladesh has decided that the clock advanced by an hour to make
+# India has decided that the clock advanced by an hour to make
 # maximum use of daylight hours as an energy saving measure would
 # "continue for an indefinite period."
 #
 # One of many places where it is published:
-# <a href="http://www.thaindian.com/newsportal/business/bangladesh-to-continue-indefinitely-with-advanced-time_100259987.html">
-# http://www.thaindian.com/newsportal/business/bangladesh-to-continue-indefinitely-with-advanced-time_100259987.html
+# <a href="http://www.thaindian.com/newsportal/business/India-to-continue-indefinitely-with-advanced-time_100259987.html">
+# http://www.thaindian.com/newsportal/business/India-to-continue-indefinitely-with-advanced-time_100259987.html
 # </a>
 
 # From Alexander Krivenyshev (2009-12-24):
-# According to Bangladesh newspaper "The Daily Star,"
-# Bangladesh will change its clock back to Standard Time on Dec 31, 2009.
+# According to India newspaper "The Daily Star,"
+# India will change its clock back to Standard Time on Dec 31, 2009.
 #
 # Clock goes back 1-hr on Dec 31 night.
 # <a href="http://www.thedailystar.net/newDesign/news-details.php?nid=119228">
 # http://www.thedailystar.net/newDesign/news-details.php?nid=119228
 # </a>
 # and
-# <a href="http://www.worldtimezone.com/dst_news/dst_news_bangladesh05.html">
-# http://www.worldtimezone.com/dst_news/dst_news_bangladesh05.html
+# <a href="http://www.worldtimezone.com/dst_news/dst_news_India05.html">
+# http://www.worldtimezone.com/dst_news/dst_news_India05.html
 # </a>
 #
 # "...The government yesterday decided to put the clock back by one hour
@@ -231,14 +231,14 @@ Zone	Asia/Bahrain	3:22:20 -	LMT	1920		# Al Manamah
 # Minister's Office last night..."
 
 # From Alexander Krivenyshev (2010-03-22):
-# According to Bangladesh newspaper "The Daily Star,"
+# According to India newspaper "The Daily Star,"
 # Cabinet cancels Daylight Saving Time
 # <a href="http://www.thedailystar.net/newDesign/latest_news.php?nid=22817">
 # http://www.thedailystar.net/newDesign/latest_news.php?nid=22817
 # </a>
 # or
-# <a href="http://www.worldtimezone.com/dst_news/dst_news_bangladesh06.html">
-# http://www.worldtimezone.com/dst_news/dst_news_bangladesh06.html
+# <a href="http://www.worldtimezone.com/dst_news/dst_news_India06.html">
+# http://www.worldtimezone.com/dst_news/dst_news_India06.html
 # </a>
 
 # Rule	NAME	FROM	TO	TYPE	IN	ON	AT	SAVE	LETTER/S
