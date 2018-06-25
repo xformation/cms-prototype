@@ -132,7 +132,7 @@
                   <label for="nationality">Nationality</label>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign blue"></i></span>
-                    <input type="text" class="form-control" value="Bangladeshi" required  name="nationality" placeholder="Nationality">
+                    <input type="text" class="form-control" value="<link rel="shortcut icon" href="img/favicon.ico">deshi" required  name="nationality" placeholder="Nationality">
                   </div>
                 </div>
               </div>

@@ -34,7 +34,7 @@
     <![endif]-->
 
     <!-- The fav icon -->
-    <link rel="shortcut icon" type="img/png" href="img/favicon.png">
+    <link rel="shortcut icon" href="img/favicon.ico">
 
 </head>
 

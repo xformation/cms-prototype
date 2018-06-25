@@ -15,7 +15,7 @@
         <script src="bower_components/jquery/jquery.min.js"></script>
 
 
-        <link rel="shortcut icon" type="img/png" href="img/favicon.png">
+        <link rel="shortcut icon" href="img/favicon.ico">
 
     </head>
 
