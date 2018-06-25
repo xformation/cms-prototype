@@ -545,7 +545,7 @@ class gradesheetController extends \BaseController {
                                     $totalmarks = 0;
 
                                     //subject counter for final grade calculation
-                                    $subcounter = 0;
+                                    $subcounter = 1;
 
                                     $banglamark = 0;
                                     $englishmark = 0;
