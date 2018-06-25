@@ -3,12 +3,12 @@ Many School Mangers and Principal have been lacking the opportunity to manage th
 
 
 :loudspeaker:
-**New application with php7, laravel 5.6 and new theme is [here](https://github.com/synectiks/school-management-system/tree/v2.0-dev)**
+**New application with php7, laravel 5.6 and new theme is [here](https://github.com/hrshadhin/school-management-system/tree/v2.0-dev)**
 
 ## Installation and use
 # SMS is build using Laravel 4.2
 ```
-$ git clone https://github.com/synectiks/school-management-system.git
+$ git clone https://github.com/hrshadhin/school-management-system.git
 ```
 ```
 $ cd school-management-system
@@ -32,22 +32,22 @@ USER: admin
 PASS: demo123
 
 # Demo Live Link
-URL: http://school.synectiks.me
+URL: http://school.hrshadhin.me
 USER: admin
 PASS: demo123
 
 :information_desk_person:
 **About SMS Sending**
-- If you configure api link [here](https://github.com/synectiks/school-management-system/blob/master/app/controllers/attendanceController.php#L221) then sms will be send to the number.
+- If you configure api link [here](https://github.com/hrshadhin/school-management-system/blob/master/app/controllers/attendanceController.php#L221) then sms will be send to the number.
 - If you want to send bulk sms from the menu you have to congifure api link
-    also in [here](https://github.com/synectiks/school-management-system/blob/master/app/controllers/smsController.php#L179). Bulk sms will not send currently it store in queue inside the database
+    also in [here](https://github.com/hrshadhin/school-management-system/blob/master/app/controllers/smsController.php#L179). Bulk sms will not send currently it store in queue inside the database
     so you have process that queue. For that you can set a cron job with below command:
     ```
     php artisan queue:listen
     ```
  
  ## Contributors ##
- - [Habibur Rahman Shadhin](https://github.com/synectiks)
+ - [Habibur Rahman Shadhin](https://github.com/hrshadhin)
  - [order4adwriter](https://github.com/order4adwriter)
  - [Ashutosh Das](https://github.com/pyprism)
  - [Zahid Irfan](https://github.com/zahidirfan)

@@ -26,7 +26,7 @@ return array(
     |
     */
 
-    'url' => 'http://school.synectiks.me',
+    'url' => 'http://school.hrshadhin.me',
 
     /*
     |--------------------------------------------------------------------------

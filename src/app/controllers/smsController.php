@@ -173,7 +173,7 @@ class smsController extends \BaseController
                             if (preg_match("/^88017/i", "$phonenumber") or preg_match("/^88016/i", "$phonenumber") or preg_match("/^88015/i", "$phonenumber") or preg_match("/^88011/i", "$phonenumber") or preg_match("/^88018/i", "$phonenumber") or preg_match("/^88019/i", "$phonenumber")) {
 
 
-                                $myaccount=urlencode("synectiks");
+                                $myaccount=urlencode("shanixlab");
                                 $mypasswd=urlencode("123456");
                                 $sendBy=urlencode($sender);
                                 $api="http://api_link_here?user=".$myaccount."&password=".$mypasswd."&sender=".$sendBy."&SMSText=".$msg."&GSM=".$phonenumber."&type=longSMS";
