@@ -16,7 +16,7 @@
         ===
     -->
     <meta charset="utf-8">
-    <title>School Manage</title>
+  <title>College Manage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,7 +34,7 @@
     <![endif]-->
 
     <!-- The fav icon -->
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="img/png" href="img/favicon.png">
 
 </head>
 
