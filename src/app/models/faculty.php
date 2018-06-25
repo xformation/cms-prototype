@@ -1,7 +1,7 @@
 <?php
 
 class Teachers extends \Eloquent {
-    protected $table = 'Teachers';
+    protected $table = 'Faculty';
 
     protected $fillable = [
         'regNo',

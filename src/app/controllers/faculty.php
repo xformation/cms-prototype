@@ -63,25 +63,25 @@ class facultyController extends \BaseController {
         else {
             $fileName=Input::get('regNo').'.'.Input::file('photo')->getClientOriginalExtension();
 
-            $teacher = new Faculty;
-            $teacher->regNo= Input::get('regNo');
-            $teacher->fullName= Input::get('fullName');
-            $teacher->gender= Input::get('gender');
-            $teacher->egroup= Input::get('egroup');
-            $teacher->religion= Input::get('religion');
-            $teacher->bloodgroup= Input::get('bloodgroup');
-            $teacher->nationality= Input::get('nationality');
-            $teacher->dob= Input::get('dob');
-            $teacher->joinDate= Input::get('joinDate');
-            $teacher->photo= $fileName;
-            $teacher->educationQualification= Input::get('educationQualification');
-            $teacher->cellNo= Input::get('cellNo');
-            $teacher->details= Input::get('details');
-            $teacher->presentAddress= Input::get('presentAddress');
-            $teacher->parmanentAddress= Input::get('parmanentAddress');
-            $teacher->isActive=1;
+            $faculty = new Faculty;
+            $faculty->regNo= Input::get('regNo');
+            $faculty->fullName= Input::get('fullName');
+            $faculty->gender= Input::get('gender');
+            $faculty->egroup= Input::get('egroup');
+            $faculty->religion= Input::get('religion');
+            $faculty->bloodgroup= Input::get('bloodgroup');
+            $faculty->nationality= Input::get('nationality');
+            $faculty->dob= Input::get('dob');
+            $faculty->joinDate= Input::get('joinDate');
+            $faculty->photo= $fileName;
+            $faculty->educationQualification= Input::get('educationQualification');
+            $faculty->cellNo= Input::get('cellNo');
+            $faculty->details= Input::get('details');
+            $faculty->presentAddress= Input::get('presentAddress');
+            $faculty->parmanentAddress= Input::get('parmanentAddress');
+            $faculty->isActive=1;
 
-            $hasTeacher = Teachers::where('regNo','=',Input::get('regNo'))->where('isActive',1)->first();
+            $hasTeacher = Faculty::where('regNo','=',Input::get('regNo'))->where('isActive',1)->first();
             if ($hasTeacher)
             {
                 $messages = $validator->errors();
@@ -90,7 +90,7 @@ class facultyController extends \BaseController {
             }
             else {
                 Input::file('photo')->move(base_path() .'/public/images/teachers',$fileName);
-                $teacher->save();
+                $faculty->save();
                 return Redirect::to('/faculty/create')->with("success","Faculty added succesfully.");
             }
 
@@ -106,7 +106,7 @@ class facultyController extends \BaseController {
     public function show()
     {
 
-        $teachers = Teachers::where('isActive',1)->orderBy('regNo','asc')->get();
+        $facultys = Faculty::where('isActive',1)->orderBy('regNo','asc')->get();
         return View::Make("app.faculty.list", compact('faculty'));
 
 
@@ -115,7 +115,7 @@ class facultyController extends \BaseController {
 
     public function view($id)
     {
-        $teacher = Teachers::where('regNo',$id)->where('isActive',1)->first();
+        $faculty = Faculty::where('regNo',$id)->where('isActive',1)->first();
         $cl = Leaves::where('regNo',$id)->where('lType','CL')->whereYear('leaveDate','=',date('Y'))->where('status',2)->count();
         $ml = Leaves::where('regNo',$id)->where('lType','ML')->whereYear('leaveDate','=',date('Y'))->where('status',2)->count();
         $ul = Leaves::where('regNo',$id)->where('lType','UL')->whereYear('leaveDate','=',date('Y'))->where('status',2)->count();
@@ -130,7 +130,7 @@ class facultyController extends \BaseController {
      */
     public function edit($id)
     {
-        $teacher = Teachers::where('regNo',$id)->where('isActive',1)->first();
+        $faculty = Faculty::where('regNo',$id)->where('isActive',1)->first();
         return View::Make("app.teacher.edit",compact('teacher'));
     }
 
@@ -167,7 +167,7 @@ class facultyController extends \BaseController {
         }
         else {
 
-            $teacher = Teachers::where('regNo',Input::get('id'))->first();
+            $faculty = Faculty::where('regNo',Input::get('id'))->first();
 
             if(Input::hasFile('photo'))
             {
@@ -181,31 +181,31 @@ class facultyController extends \BaseController {
                 else {
 
                     $fileName=Input::get('regNo').'.'.Input::file('photo')->getClientOriginalExtension();
-                    $teacher->photo = $fileName;
+                    $faculty->photo = $fileName;
                     Input::file('photo')->move(base_path() .'/public/images/teachers',$fileName);
                 }
 
             }
             else {
-                $teacher->photo= Input::get('oldphoto');
+                $faculty->photo= Input::get('oldphoto');
 
             }
 //            $student->regiNo=Input::get('regiNo');
-//            $teacher->regNo= Input::get('regNo');
-            $teacher->fullName= Input::get('fullName');
-            $teacher->gender= Input::get('gender');
-            $teacher->egroup= Input::get('egroup');
-            $teacher->religion= Input::get('religion');
-            $teacher->bloodgroup= Input::get('bloodgroup');
-            $teacher->nationality= Input::get('nationality');
-            $teacher->dob= Input::get('dob');
-            $teacher->joinDate= Input::get('joinDate');
-            $teacher->educationQualification= Input::get('educationQualification');
-            $teacher->cellNo= Input::get('cellNo');
-            $teacher->details= Input::get('details');
-            $teacher->presentAddress= Input::get('presentAddress');
-            $teacher->parmanentAddress= Input::get('parmanentAddress');
-            $teacher->update();
+//            $faculty->regNo= Input::get('regNo');
+            $faculty->fullName= Input::get('fullName');
+            $faculty->gender= Input::get('gender');
+            $faculty->egroup= Input::get('egroup');
+            $faculty->religion= Input::get('religion');
+            $faculty->bloodgroup= Input::get('bloodgroup');
+            $faculty->nationality= Input::get('nationality');
+            $faculty->dob= Input::get('dob');
+            $faculty->joinDate= Input::get('joinDate');
+            $faculty->educationQualification= Input::get('educationQualification');
+            $faculty->cellNo= Input::get('cellNo');
+            $faculty->details= Input::get('details');
+            $faculty->presentAddress= Input::get('presentAddress');
+            $faculty->parmanentAddress= Input::get('parmanentAddress');
+            $faculty->update();
 
             return Redirect::to('/teacher/list')->with("success","Teacher Updated Succesfully.");
         }
@@ -222,9 +222,9 @@ class facultyController extends \BaseController {
      */
     public function delete($id)
     {
-        $teacher = Teachers::where('regNo',$id)->first();
-        $teacher->isActive= 0;
-        $teacher->save();
+        $faculty = Faculty::where('regNo',$id)->first();
+        $faculty->isActive= 0;
+        $faculty->save();
 
         return Redirect::to('/teacher/list')->with("success","Teacher Deleted Succesfully.");
     }
@@ -410,7 +410,7 @@ class facultyController extends \BaseController {
             ));
 
         }
-        $teachers = ['0'=>'All']+Teachers::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
+        $facultys = ['0'=>'All']+Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
         return View::Make('app.teacher.attendanceList',
             compact('teachers','attendance','regNo','egroup','searchType',
                 'dateFrom','dateTo','holiDays','empWorks'
@@ -436,17 +436,17 @@ class facultyController extends \BaseController {
             $data=[];
 
             if($egroup=="Teacher"){
-                $teachers = Teachers::select('regNo')->where('egroup','Teacher')->lists('regNo');
+                $facultys = Faculty::select('regNo')->where('egroup','Teacher')->lists('regNo');
 
                 $data = TeacherAttendance::selectRaw("date, COUNT(CASE WHEN vSTATUS='P' THEN vSTATUS ELSE NULL END) present, COUNT(CASE WHEN vSTATUS='A' THEN vSTATUS ELSE NULL END) absent, COUNT(vSTATUS) as total")
                     ->whereDate('date','>=',$dateFrom)
                     ->whereDate('date','<=',$dateTo)
-                    ->whereIn('regNo',$teachers)
+                    ->whereIn('regNo',$facultys)
                     ->groupBy('date')
                     ->get();
             }
             else{
-                $staffs = Teachers::select('regNo')->where('egroup','Staff')->lists('regNo');
+                $staffs = Faculty::select('regNo')->where('egroup','Staff')->lists('regNo');
 
                 $data = TeacherAttendance::selectRaw("date, COUNT(CASE WHEN vSTATUS='P' THEN vSTATUS ELSE NULL END) present, COUNT(CASE WHEN vSTATUS='A' THEN vSTATUS ELSE NULL END) absent, COUNT(vSTATUS) as total")
                     ->whereDate('date','>=',$dateFrom)
@@ -532,7 +532,7 @@ class facultyController extends \BaseController {
             }
 
             $SelectCol = self::getSelectColumns($myPart[0],$myPart[1]);
-            $fullSql ="SELECT t.fullName as name,t.regNo,".$SelectCol." FROM TeacherAttendance as ta join Teachers as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
+            $fullSql ="SELECT t.fullName as name,t.regNo,".$SelectCol." FROM TeacherAttendance as ta join Faculty as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
 //            dd($fullSql);
             $data = DB::select($fullSql);
 //            return $data;
@@ -703,7 +703,7 @@ class facultyController extends \BaseController {
             $query = $query->where('regNo',$employee);
         }
         $leaves = $query->with('teacher')->orderBy('leaveDate','desc')->get();
-        $teachers = ['0'=>'All']+Teachers::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
+        $facultys = ['0'=>'All']+Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
         return View::Make('app.teacher.leave.list',compact('leaves','teachers','employee','type','status'));
     }
 
@@ -716,7 +716,7 @@ class facultyController extends \BaseController {
      */
     public function leaveCreate()
     {
-        $teachers = Teachers::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
+        $facultys = Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
         return View::Make('app.teacher.leave.create',compact('teachers'));
 
     }
@@ -911,7 +911,7 @@ class facultyController extends \BaseController {
             $query = $query->where('regNo',$employee);
         }
         $workOutsides = $query->with('teacher')->orderBy('workDate','desc')->get();
-        $teachers = ['0'=>'All']+Teachers::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
+        $facultys = ['0'=>'All']+Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
         return View::Make('app.teacher.workoutside.list',compact('workOutsides','teachers','employee'));
     }
 
@@ -924,7 +924,7 @@ class facultyController extends \BaseController {
      */
     public function workOutsideCreate()
     {
-        $teachers = Teachers::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
+        $facultys = Faculty::select('regNo','fullName')->where('isActive',1)->orderby('regNo','asc')->lists('fullName','regNo');
         return View::Make('app.teacher.workoutside.create',compact('teachers'));
 
     }
@@ -1113,7 +1113,7 @@ class facultyController extends \BaseController {
             }
 
             $SelectCol = self::getSelectColumns($myPart[0],$myPart[1]);
-            $fullSql ="SELECT t.fullName as name,t.regNo,'status/time',".$SelectCol." FROM TeacherAttendance as ta join Teachers as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
+            $fullSql ="SELECT t.fullName as name,t.regNo,'status/time',".$SelectCol." FROM TeacherAttendance as ta join Faculty as t ON ta.regNo=t.regNo AND t.isActive=1 GROUP BY ta.regNo;";
             $data = DB::select($fullSql);
             $keys = array_keys((array)$data[0]);
 
