@@ -452,7 +452,6 @@
     <img src="<?php echo url();?>/markssheetcontent/certificate-bg.png" alt="" class="result-bg">    </div><!-- end of wraperResult -->
   </div>
 
-
    <script>
    function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;
