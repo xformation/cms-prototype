@@ -78,7 +78,7 @@
                 <div><span>DATE OF BIRTH</span><i>: </i><em>{{$student->dob}}</em></div>
                 <!--<div><span>NEW CLASS ROLL :  </span><em>02</em></div>-->
                 <div><span>SHIFT</span><i>: </i><em>{{$student->shift}}</em></div>
-                <div><span>BOARD</span><i>: </i><em>KHULNA</em></div>
+                <div><span>BOARD</span><i>: </i><em>JNTU</em></div>
             </div><!-- end of restopleft -->
 
             <div class="restopleft rgttopleft">
